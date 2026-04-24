@@ -1,13 +1,13 @@
 #!/bin/bash
 export HF_ENDPOINT=https://hf-mirror.com
 
-# 固定参数
-MODEL_NAME="/mnt/fuse/.cache/models--stabilityai--stable-diffusion-3-medium-diffusers/snapshots/ea42f8cef0f178587cf766dc8129abd379c90671"
-DATASET_NAME="/zjk_nas/zhiyi/data/HPDv3" # make sure "pickapic" in dataset_name
+# Fixed parameters
+MODEL_NAME="stabilityai/stable-diffusion-3-medium-diffusers"
+DATASET_NAME="./data/HPDv3" # make sure "pickapic" in dataset_name
 WORLD_SIZE=8
 ACCUMULATION_STEPS=16
 BATCH_SIZE=$((WORLD_SIZE * ACCUMULATION_STEPS))
-CACHE_DIR="/zjk_nas/zhiyi/huggingface_cache/datasets"
+CACHE_DIR="./huggingface_cache/datasets"
 MAX_TRAIN_STEPS=3200
 MIXED_PRECISION="fp16"
 DATALOADER_WORKERS=8
@@ -22,12 +22,12 @@ for LR in "${LR_LIST[@]}"; do
         for ETA in "${ETA_list[@]}"; do
           for DECAY in "${DECAY[@]}"; do
             RUN_NAME="SD3_HPDv3_lr${LR}_bs${BATCH_SIZE}_beta${BETA}"
-            OUTPUT_DIR="/zjk_nas/zhiyi/output/Diffusers_sd3_dpo_ema/${RUN_NAME}"
+            OUTPUT_DIR="./outputs/Diffusers_sd3_dpo_ema/${RUN_NAME}"
             
             echo "=============================="
-            echo "🚀 开始训练: LR=${LR}, BETA=${BETA}, ETA=${ETA}"
+            echo "🚀 Start training: LR=${LR}, BETA=${BETA}, ETA=${ETA}"
             echo "Run name: $RUN_NAME"
-            echo "输出目录: $OUTPUT_DIR"
+            echo "Output directory: $OUTPUT_DIR"
             echo "=============================="
 
             accelerate launch train/train_sd3_dpo.py \
