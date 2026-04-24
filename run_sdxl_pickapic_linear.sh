@@ -41,7 +41,7 @@ for LR in "${LR_LIST[@]}"; do
         --linear_dpo \
         --eta_dpo=${ETA} \
 
-      echo "✅ 完成运行: LR=$LR  BETA=$BETA"
+      echo "✅ Finished: LR=$LR  BETA=$BETA"
     done
   done
 done
