@@ -13,7 +13,7 @@ from tqdm import tqdm
 model_id_mapping= {
     'sd1.5': {
         'ori': 'sd-legacy/stable-diffusion-v1-5',
-        'sft': '/nas/zhiyi/output/Diffusers_sd_dpo/SFT_SD_PickaPic_lr_bs128/checkpoint-10000/',
+        'sft': 'path/to/your/own/reproduction',
         'diffusion_dpo': 'mhdang/dpo-sd1.5-text2image-v1',
         'diffusion_kto': 'jacklishufan/diffusion-kto',
         'linear_dpo': 'whynot0128/Linear-DPO',
