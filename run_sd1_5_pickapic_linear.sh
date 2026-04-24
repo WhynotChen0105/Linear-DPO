@@ -1,11 +1,11 @@
 #!/bin/bash
 
-export MODEL_NAME="/mnt/fuse/.cache/models--runwayml--stable-diffusion-v1-5/snapshots/1d0c4ebf6ff58a5caecab40fa1406526bca4b5b9"
-export DATASET_NAME="/nas/xinxuan/model/datasets--liuhuohuo2--pick-a-pic-v2/pickapic" # make sure "pickapic" in dataset_name 
+export MODEL_NAME="sd-legacy/stable-diffusion-v1-5"
+export DATASET_NAME="./datasets--liuhuohuo2--pick-a-pic-v2/pickapic" # make sure "pickapic" in dataset_name 
 export HF_ENDPOINT=https://hf-mirror.com
 export WORLD_SIZE=32
 export ACCUMULATION_STEPS=4
-CACHE_DIR="/nas/zhiyi/huggingface_cache/datasets"
+CACHE_DIR="./huggingface_cache/datasets"
 
 LR_LIST=(5e-6)
 BETA_LIST=(100)
@@ -14,13 +14,13 @@ DECAYS=(0.99 0.995 0.95)
 for LR in "${LR_LIST[@]}"; do
   for BETA in "${BETA_LIST[@]}"; do
     for ETA in "${ETA_list[@]}"; do
-      for DECAY in "${DECAYS[@]}"; do
+      for DECAY in "${DECAY[@]}"; do
         BATCH_SIZE=$((WORLD_SIZE * ACCUMULATION_STEPS))
         RUN_NAME="linear_85k_SD_PickaPic_lr${LR}_bs${BATCH_SIZE}_beta${BETA}_eta${ETA}_ema${DECAY}"
-        OUTPUT_DIR="/nas/zhiyi/output/Diffusers_sd_dpo/${RUN_NAME}"
+        OUTPUT_DIR="./outputs/Diffusers_sd_dpo/${RUN_NAME}"
 
         echo "-------------------------------------------"
-        echo "▶ 开始运行: LR=$LR  BETA=$BETA"
+        echo "▶ start training: LR=$LR  BETA=$BETA"
         echo "-------------------------------------------"
 
         accelerate launch --mixed_precision="fp16" train/train_sd_dpo.py \
