@@ -6,7 +6,7 @@ class PickScoreScorer(torch.nn.Module):
     def __init__(self, device="cuda", dtype=torch.float32):
         super().__init__()
         processor_path = "laion/CLIP-ViT-H-14-laion2B-s32B-b79K"
-        model_path = "/nas/zhiyi/models/PickScore"
+        model_path = "yuvalkirstain/PickScore_v1"
         self.device = device
         self.dtype = dtype
         self.processor = CLIPProcessor.from_pretrained(processor_path)
