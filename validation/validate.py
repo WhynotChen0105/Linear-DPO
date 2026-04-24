@@ -16,22 +16,22 @@ model_id_mapping= {
         'sft': '/nas/zhiyi/output/Diffusers_sd_dpo/SFT_SD_PickaPic_lr_bs128/checkpoint-10000/',
         'diffusion_dpo': 'mhdang/dpo-sd1.5-text2image-v1',
         'diffusion_kto': 'jacklishufan/diffusion-kto',
-        'easy_dpo': '/nas/zhiyi/output/Diffusers_sd_dpo/SD_PickaPic_lr5e-6_bs128_beta500_clip_v4/checkpoint-19500',
-        'dspo': '/nas/zhiyi/models/DSPO_retrain/checkpoint-1000'
+        'linear_dpo': 'whynot0128/Linear-DPO',
+        'dspo': 'path/to/your/own/reproduction'
     },
 
     'sdxl': {
         'ori': 'stabilityai/stable-diffusion-xl-base-1.0',
         'diffusion_dpo': 'mhdang/dpo-sdxl-text2image-v1',
         'mapo': 'mapo-t2i/mapo-beta',
-        'sft': "/nas/zhiyi/output/Diffusers_sdxl_dpo/SFT_SDXL_PickaPic_lr_bs128/checkpoint-10000/",
-        'easy_dpo': '/nas/zhiyi/output/Diffusers_sdxl_dpo/linear_SDXL_PickaPic_lr5e-6_bs128_beta500_eta0_ema_0.995/checkpoint-1200',
+        'sft': "path/to/your/own/reproduction",
+        'linear_dpo': 'whynot0128/Linear-DPO-SDXL',
     },
     'sd3': {
         'ori': 'stabilityai/stable-diffusion-3-medium-diffusers',
-        'sft': '/nas/zhiyi/output/Diffusers_sd3_dpo_ema/SFT_SD3_HPDv3_1024_lr_bs128_beta/checkpoint-3000/',
-        'diffusion_dpo': '/nas/zhiyi/output/Diffusers_sd3_dpo_ema/Linear_SD3_HPDv3_lr5e-6_bs128_beta100_eta0_ema_1/checkpoint-420',
-        'easy_dpo': '/nas/zhiyi/output/Diffusers_sd3_dpo_ema/Linear_SD3_HPDv3_lr5e-6_bs128_beta100_eta0_ema_1/checkpoint-1020',
+        'sft': 'path/to/your/own/reproduction',
+        'diffusion_dpo': 'path/to/your/own/reproduction',
+        'linear_dpo': 'whynot0128/Linear-DPO-SD3',
     },
     'qwen': {
         'ori': '/mnt/ramdisk/hf_qwen_image',
@@ -114,7 +114,7 @@ def load_scorer(scorer_name, device, dtype=torch.float32):
 def get_args():
     parser = ArgumentParser()
     parser.add_argument("--model_name", choices= ["sd1.5", "sdxl", "sd3", 'qwen'], default="sd1.5")
-    parser.add_argument("--method", choices = ["diffusion_dpo", "diffusion_kto", 'mapo','ori', 'easy_dpo', 'dspo', 'sft'], default="diffusion_dpo")
+    parser.add_argument("--method", choices = ["diffusion_dpo", "diffusion_kto", 'mapo','ori', 'linear_dpo', 'dspo', 'sft'], default="diffusion_dpo")
     parser.add_argument("--scorers", type=str, nargs="+", default=["pickscore", "hpsv2", "aesthetic_score", "clip_score", "image_reward", "hpsv3"])
     parser.add_argument("--benchmarks", type=str, nargs="+", default=["pickapic", "hpsv2", "partiprompts"])
     parser.add_argument("--output_dir", type=str, default="../validation_output")
