@@ -2,11 +2,11 @@
 
 export MODEL_NAME="stabilityai/stable-diffusion-xl-base-1.0"
 export VAE="madebyollin/sdxl-vae-fp16-fix" # make sure it is not empty
-export DATASET_NAME="/nas/xinxuan/model/datasets--liuhuohuo2--pick-a-pic-v2/pickapic" # make sure "pickapic" in dataset_name 
+export DATASET_NAME="yuvalkirstain/pickapic_v2" # make sure "pickapic" in dataset_name 
 export HF_ENDPOINT=https://hf-mirror.com
 export WORLD_SIZE=16
 export ACCUMULATION_STEPS=8
-CACHE_DIR="/nas/zhiyi/huggingface_cache/datasets"
+CACHE_DIR="./huggingface_cache/datasets"
 
 LR_LIST=(1e-5)
 BETA_LIST=(500)
@@ -17,7 +17,7 @@ for LR in "${LR_LIST[@]}"; do
     for ETA in "${ETA_list[@]}"; do
       BATCH_SIZE=$((WORLD_SIZE * ACCUMULATION_STEPS))
       RUN_NAME="linear_SDXL_PickaPic_lr${LR}_bs${BATCH_SIZE}_beta${BETA}_eta${ETA}"
-      OUTPUT_DIR="/nas/zhiyi/output/Diffusers_sdxl_dpo/${RUN_NAME}"
+      OUTPUT_DIR="./outputs/Diffusers_sdxl_dpo/${RUN_NAME}"
 
       accelerate launch --mixed_precision="fp16" train/train_sd_dpo.py \
         --sdxl \
