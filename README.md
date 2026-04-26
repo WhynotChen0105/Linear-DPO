@@ -1,10 +1,21 @@
 # Linear-DPO
 
-The official repository for Linear-DPO.
+The official repository for Linear-DPO:LinearDirectPreferenceOptimizationforDiffusionand Flow-MatchingGenerativeModels.
 
 ## 🛠️ Setup Environment
 
-To install the required dependencies, run the following command:
+First, create a new conda environment with Python 3.11 and activate it:
+```bash
+conda create -n linear-dpo python=3.11 -y
+conda activate linear-dpo
+```
+
+Next, install PyTorch (2.2.1) with CUDA 11.8 support:
+```bash
+pip install torch==2.2.1 torchvision==0.17.1 torchaudio==2.2.1 --index-url [https://download.pytorch.org/whl/cu118](https://download.pytorch.org/whl/cu118)
+```
+
+Finally, install the remaining required dependencies:
 ```bash
 pip install -r requirements.txt
 ```
