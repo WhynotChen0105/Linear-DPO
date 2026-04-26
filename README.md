@@ -1,6 +1,6 @@
 # Linear-DPO
 
-The official repository for Linear-DPO:LinearDirectPreferenceOptimizationforDiffusionand Flow-MatchingGenerativeModels.
+The official repository for Linear-DPO: Linear Direct Preference Optimization for Diffusion and Flow-Matching Generative Models.
 
 ## 🛠️ Setup Environment
 
