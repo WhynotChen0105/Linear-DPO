@@ -101,7 +101,7 @@ def load_pipeline(model_name, method, dtype=torch.float16, original_model_id=Non
 def load_prompts(prompt_file):
     assert prompt_file.lower() in prompt_path_mapping.keys()
     prompt_file = prompt_path_mapping[prompt_file.lower()]
-    with open(prompt_file, 'r') as f:
+    with open(prompt_file, 'r', encoding='utf-8') as f:
         prompts = f.readlines()
     return prompts
 
@@ -117,7 +117,7 @@ def get_args():
     parser.add_argument("--method", choices = ["diffusion_dpo", "diffusion_kto", 'mapo','ori', 'linear_dpo', 'dspo', 'sft'], default="diffusion_dpo")
     parser.add_argument("--scorers", type=str, nargs="+", default=["pickscore", "hpsv2", "aesthetic_score", "clip_score", "image_reward", "hpsv3"])
     parser.add_argument("--benchmarks", type=str, nargs="+", default=["pickapic", "hpsv2", "partiprompts"])
-    parser.add_argument("--output_dir", type=str, default="../validation_output")
+    parser.add_argument("--output_dir", type=str, default="./validation_output")
     parser.add_argument("--width", type=int, default=None)
     parser.add_argument("--height", type=int, default=None)
     parser.add_argument("--dtype", choices=['fp16', 'fp32','bf16'], default="fp16")
